@@ -1,0 +1,1388 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prem | AI Solutions Developer Portfolio</title>
+    <meta name="description" content="Prem builds intelligent AI solutions, automation systems, websites, apps, and digital products that help businesses scale.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#050816',
+                        secondary: '#0f172a',
+                        accent: '#8b5cf6',
+                        highlight: '#38bdf8',
+                        muted: '#94a3b8',
+                        neon: '#7c3aed',
+                        cyan: '#22d3ee',
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #050816; color: #ffffff; overflow-x: hidden; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Space Grotesk', sans-serif; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050816; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(#7c3aed, #22d3ee); border-radius: 10px; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #7c3aed, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), 0 0 60px rgba(34, 211, 238, 0.05);
+            transform: translateY(-8px);
+        }
+
+        .neon-border {
+            position: relative;
+        }
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #7c3aed, #22d3ee, #7c3aed);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .neon-border:hover::before {
+            opacity: 1;
+        }
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #22d3ee);
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.5), 0 0 60px rgba(34, 211, 238, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            border-color: #22d3ee;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .floating { animation: floating 6s ease-in-out infinite; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 80px rgba(34, 211, 238, 0.2); }
+        }
+
+        .typing-cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #7c3aed, #22d3ee);
+            transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -50%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 100% { left: 150%; } }
+
+        #three-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(139, 92, 246, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .chat-message {
+            animation: msgSlide 0.3s ease-out;
+        }
+        @keyframes msgSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #7c3aed, #22d3ee);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: #22d3ee; }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(34, 211, 238, 0.1));
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .project-card img {
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.4));
+        }
+
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+
+        .orbit-ring {
+            animation: rotate 20s linear infinite;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .chatbot-window {
+            transform: scale(0) translateY(20px);
+            transform-origin: bottom right;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+            opacity: 0;
+        }
+        .chatbot-window.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .glow-dot {
+            width: 8px;
+            height: 8px;
+            background: #22d3ee;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22d3ee, 0 0 20px #22d3ee;
+        }
+
+        input, textarea {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tech-float {
+            animation: techFloat 8s ease-in-out infinite;
+        }
+        .tech-float:nth-child(2) { animation-delay: -2s; }
+        .tech-float:nth-child(3) { animation-delay: -4s; }
+        .tech-float:nth-child(4) { animation-delay: -6s; }
+
+        @keyframes techFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -15px) rotate(5deg); }
+            50% { transform: translate(-5px, -25px) rotate(-3deg); }
+            75% { transform: translate(-15px, -10px) rotate(3deg); }
+        }
+
+        .section-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #7c3aed, #22d3ee, transparent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles Container -->
+    <div id="particles"></div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="#home" class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon to-cyan flex items-center justify-center font-heading font-bold text-lg">P</div>
+                    <span class="font-heading font-bold text-xl hidden sm:block">Prem<span class="text-cyan">AI</span></span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="nav-link text-sm text-muted hover:text-white">Home</a>
+                    <a href="#about" class="nav-link text-sm text-muted hover:text-white">About</a>
+                    <a href="#services" class="nav-link text-sm text-muted hover:text-white">Services</a>
+                    <a href="#projects" class="nav-link text-sm text-muted hover:text-white">Projects</a>
+                    <a href="#skills" class="nav-link text-sm text-muted hover:text-white">Skills</a>
+                    <a href="#ai-demo" class="nav-link text-sm text-muted hover:text-white">AI Demo</a>
+                    <a href="#contact" class="nav-link text-sm text-muted hover:text-white">Contact</a>
+                </div>
+
+                <div class="hidden md:block">
+                    <a href="#contact" class="btn-primary text-sm px-6 py-2.5">Hire Me</a>
+                </div>
+
+                <button id="mobile-toggle" class="md:hidden text-white p-2">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] bg-primary/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+        <button id="mobile-close" class="absolute top-5 right-5 text-white p-2">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <a href="#home" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">Home</a>
+        <a href="#about" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">About</a>
+        <a href="#services" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">Services</a>
+        <a href="#projects" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">Projects</a>
+        <a href="#skills" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">Skills</a>
+        <a href="#ai-demo" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">AI Demo</a>
+        <a href="#contact" class="mobile-link font-heading text-2xl text-muted hover:text-white transition-colors">Contact</a>
+        <a href="#contact" class="btn-primary mt-4">Hire Me</a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <canvas id="three-canvas"></canvas>
+
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/30 via-primary/60 to-primary z-[1]"></div>
+
+        <div class="relative z-[2] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+            <div class="mb-6">
+                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-cyan">
+                    <span class="glow-dot"></span>
+                    Available for Projects
+                </span>
+            </div>
+
+            <h1 class="font-heading text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="gradient-text">AI Solutions</span> by<br>
+                <span class="text-white">Prem</span>
+            </h1>
+
+            <p class="text-muted text-lg sm:text-xl max-w-3xl mx-auto mb-4">
+                I build intelligent digital systems that help businesses automate, grow, and scale using Artificial Intelligence.
+            </p>
+
+            <div class="h-10 flex items-center justify-center mb-10">
+                <span class="text-xl sm:text-2xl font-heading font-semibold">
+                    <span class="text-cyan">I'm a </span>
+                    <span id="typing-text" class="gradient-text"></span>
+                    <span class="typing-cursor text-cyan">|</span>
+                </span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="btn-primary text-lg px-8 py-4">
+                    <span class="flex items-center gap-2 justify-center">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        View My Work
+                    </span>
+                </a>
+                <a href="#contact" class="btn-outline text-lg px-8 py-4">
+                    <span class="flex items-center gap-2 justify-center">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        Hire Me
+                    </span>
+                </a>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+                <svg width="24" height="24" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">About Me</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">Who is <span class="gradient-text">Prem</span>?</h2>
+                <div class="section-line w-24 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="relative w-full max-w-md mx-auto">
+                        <div class="glass-card p-8 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-neon/20 to-transparent rounded-bl-full"></div>
+                            <div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-neon to-cyan mx-auto mb-6 flex items-center justify-center">
+                                <span class="font-heading text-5xl font-bold">P</span>
+                            </div>
+                            <div class="flex justify-center gap-4 mt-4">
+                                <div class="tech-float w-12 h-12 rounded-xl glass flex items-center justify-center text-2xl">🤖</div>
+                                <div class="tech-float w-12 h-12 rounded-xl glass flex items-center justify-center text-2xl">⚡</div>
+                                <div class="tech-float w-12 h-12 rounded-xl glass flex items-center justify-center text-2xl">🧠</div>
+                                <div class="tech-float w-12 h-12 rounded-xl glass flex items-center justify-center text-2xl">🚀</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h3 class="font-heading text-2xl font-bold mb-6">AI Developer & <span class="gradient-text">Digital Architect</span></h3>
+                    <p class="text-muted leading-relaxed mb-6">
+                        My name is Prem. I specialize in building intelligent AI-powered digital solutions. I help businesses automate workflows, create powerful websites, build AI chatbots, and design digital products that scale.
+                    </p>
+                    <p class="text-muted leading-relaxed mb-8">
+                        With expertise spanning artificial intelligence, web development, and automation systems, I deliver end-to-end solutions that transform how businesses operate and grow in the digital age.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-4 text-center">
+                            <div class="font-heading text-2xl font-bold gradient-text">50+</div>
+                            <div class="text-muted text-sm">Projects Done</div>
+                        </div>
+                        <div class="glass-card p-4 text-center">
+                            <div class="font-heading text-2xl font-bold gradient-text">30+</div>
+                            <div class="text-muted text-sm">Happy Clients</div>
+                        </div>
+                        <div class="glass-card p-4 text-center">
+                            <div class="font-heading text-2xl font-bold gradient-text">3+</div>
+                            <div class="text-muted text-sm">Years Experience</div>
+                        </div>
+                        <div class="glass-card p-4 text-center">
+                            <div class="font-heading text-2xl font-bold gradient-text">24/7</div>
+                            <div class="text-muted text-sm">AI Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="relative py-20 md:py-32 bg-secondary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">Services</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">What I <span class="gradient-text">Offer</span></h2>
+                <div class="section-line w-24 mx-auto"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card neon-border p-8 reveal" style="border-radius:16px;">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="font-heading text-xl font-bold mb-3">AI Automation Systems</h3>
+                    <p class="text-muted text-sm leading-relaxed">Build intelligent automation workflows that streamline operations, reduce costs, and boost productivity using cutting-edge AI.</p>
+                </div>
+
+                <div class="glass-card neon-border p-8 reveal" style="border-radius:16px;">
+                    <div class="service-icon">💬</div>
+                    <h3 class="font-heading text-xl font-bold mb-3">AI Chatbots & AI Agents</h3>
+                    <p class="text-muted text-sm leading-relaxed">Custom AI chatbots and intelligent agents that handle customer support, lead generation, and business processes 24/7.</p>
+                </div>
+
+                <div class="glass-card neon-border p-8 reveal" style="border-radius:16px;">
+                    <div class="service-icon">🌐</div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Website Development</h3>
+                    <p class="text-muted text-sm leading-relaxed">Premium, modern websites with stunning designs, seamless UX, and optimized performance for maximum conversions.</p>
+                </div>
+
+                <div class="glass-card neon-border p-8 reveal" style="border-radius:16px;">
+                    <div class="service-icon">📱</div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Mobile App Development</h3>
+                    <p class="text-muted text-sm leading-relaxed">Native and cross-platform mobile apps with beautiful interfaces and powerful AI-driven features.</p>
+                </div>
+
+                <div class="glass-card neon-border p-8 reveal" style="border-radius:16px;">
+                    <div class="service-icon">📚</div>
+                    <h3 class="font-heading text-xl font-bold mb-3">E-Book & Digital Publishing</h3>
+                    <p class="text-muted text-sm leading-relaxed">Professional e-book design, AI-generated content creation, and digital publishing solutions for authors and businesses.</p>
+                </div>
+
+                <div class="glass-card neon-border p-8 reveal" style="border-radius:16px;">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="font-heading text-xl font-bold mb-3">AI Business Systems</h3>
+                    <p class="text-muted text-sm leading-relaxed">Complete AI-powered business systems including CRM, analytics dashboards, and intelligent decision-making tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">Portfolio</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">Featured <span class="gradient-text">Projects</span></h2>
+                <div class="section-line w-24 mx-auto"></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card overflow-hidden project-card reveal" style="border-radius:16px;">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-neon/30 to-cyan/10 flex items-center justify-center">
+                        <span class="text-6xl">🤖</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-cyan font-heading uppercase tracking-wider">AI / Chatbot</span>
+                        <h3 class="font-heading text-lg font-bold mt-2 mb-2">AI Business Chatbot</h3>
+                        <p class="text-muted text-sm mb-4">Intelligent chatbot that handles customer inquiries, bookings, and support for businesses automatically.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm text-cyan hover:text-white transition-colors">
+                            View Project <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card overflow-hidden project-card reveal" style="border-radius:16px;">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-amber-500/20 to-yellow-500/10 flex items-center justify-center">
+                        <span class="text-6xl">🏨</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-cyan font-heading uppercase tracking-wider">Web Design</span>
+                        <h3 class="font-heading text-lg font-bold mt-2 mb-2">Luxury Hotel Website</h3>
+                        <p class="text-muted text-sm mb-4">Premium hotel website with booking system, virtual tours, and AI-powered concierge service.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm text-cyan hover:text-white transition-colors">
+                            View Project <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card overflow-hidden project-card reveal" style="border-radius:16px;">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-pink-500/20 to-rose-500/10 flex items-center justify-center">
+                        <span class="text-6xl">💄</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-cyan font-heading uppercase tracking-wider">Web Design</span>
+                        <h3 class="font-heading text-lg font-bold mt-2 mb-2">Beauty Parlour Website</h3>
+                        <p class="text-muted text-sm mb-4">Elegant beauty salon website with online booking, gallery showcase, and service catalog.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm text-cyan hover:text-white transition-colors">
+                            View Project <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card overflow-hidden project-card reveal" style="border-radius:16px;">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-green-500/20 to-emerald-500/10 flex items-center justify-center">
+                        <span class="text-6xl">📚</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-cyan font-heading uppercase tracking-wider">AI Tool</span>
+                        <h3 class="font-heading text-lg font-bold mt-2 mb-2">AI Ebook Generator</h3>
+                        <p class="text-muted text-sm mb-4">AI-powered tool that generates complete ebooks with custom content, layouts, and cover designs.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm text-cyan hover:text-white transition-colors">
+                            View Project <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card overflow-hidden project-card reveal" style="border-radius:16px;">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-blue-500/20 to-indigo-500/10 flex items-center justify-center">
+                        <span class="text-6xl">📊</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-cyan font-heading uppercase tracking-wider">AI / Dashboard</span>
+                        <h3 class="font-heading text-lg font-bold mt-2 mb-2">AI Automation Dashboard</h3>
+                        <p class="text-muted text-sm mb-4">Comprehensive dashboard for managing AI workflows, analytics, and business automation pipelines.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm text-cyan hover:text-white transition-colors">
+                            View Project <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card overflow-hidden project-card reveal" style="border-radius:16px;">
+                    <div class="h-48 overflow-hidden bg-gradient-to-br from-violet-500/20 to-purple-500/10 flex items-center justify-center">
+                        <span class="text-6xl">🎨</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-cyan font-heading uppercase tracking-wider">AI / Web App</span>
+                        <h3 class="font-heading text-lg font-bold mt-2 mb-2">AI Portfolio Builder</h3>
+                        <p class="text-muted text-sm mb-4">AI-powered portfolio generator that creates stunning personal websites in minutes.</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-sm text-cyan hover:text-white transition-colors">
+                            View Project <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="relative py-20 md:py-32 bg-secondary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">Expertise</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">My <span class="gradient-text">Skills</span></h2>
+                <div class="section-line w-24 mx-auto"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="reveal skill-item" data-percent="95">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-heading font-semibold">Artificial Intelligence</span>
+                        <span class="text-cyan font-heading font-semibold">95%</span>
+                    </div>
+                    <div class="h-3 rounded-full bg-secondary/80 overflow-hidden">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="reveal skill-item" data-percent="92">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-heading font-semibold">Prompt Engineering</span>
+                        <span class="text-cyan font-heading font-semibold">92%</span>
+                    </div>
+                    <div class="h-3 rounded-full bg-secondary/80 overflow-hidden">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="reveal skill-item" data-percent="90">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-heading font-semibold">Automation Systems</span>
+                        <span class="text-cyan font-heading font-semibold">90%</span>
+                    </div>
+                    <div class="h-3 rounded-full bg-secondary/80 overflow-hidden">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="reveal skill-item" data-percent="88">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-heading font-semibold">Web Development</span>
+                        <span class="text-cyan font-heading font-semibold">88%</span>
+                    </div>
+                    <div class="h-3 rounded-full bg-secondary/80 overflow-hidden">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="reveal skill-item" data-percent="85">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-heading font-semibold">UI/UX Design</span>
+                        <span class="text-cyan font-heading font-semibold">85%</span>
+                    </div>
+                    <div class="h-3 rounded-full bg-secondary/80 overflow-hidden">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="reveal skill-item" data-percent="97">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-heading font-semibold">Problem Solving</span>
+                        <span class="text-cyan font-heading font-semibold">97%</span>
+                    </div>
+                    <div class="h-3 rounded-full bg-secondary/80 overflow-hidden">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI DEMO SECTION -->
+    <section id="ai-demo" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">Interactive</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">Try My <span class="gradient-text">AI</span></h2>
+                <p class="text-muted max-w-xl mx-auto">Experience AI in action. Ask business questions, get website ideas, or explore automation suggestions.</p>
+                <div class="section-line w-24 mx-auto mt-4"></div>
+            </div>
+
+            <div class="max-w-2xl mx-auto reveal">
+                <div class="glass-card overflow-hidden" style="border-radius:20px; border-color: rgba(139,92,246,0.3);">
+                    <div class="p-4 border-b border-white/5 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon to-cyan flex items-center justify-center text-sm font-bold">AI</div>
+                        <div>
+                            <div class="font-heading font-semibold text-sm">Prem's AI Assistant</div>
+                            <div class="flex items-center gap-1">
+                                <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                                <span class="text-xs text-muted">Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ai-demo-chat" class="h-80 overflow-y-auto p-4 space-y-4">
+                        <div class="chat-message flex gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon to-cyan flex-shrink-0 flex items-center justify-center text-xs font-bold">AI</div>
+                            <div class="glass px-4 py-3 rounded-2xl rounded-tl-sm max-w-[80%]">
+                                <p class="text-sm">👋 Hello! I'm Prem's AI assistant. I can help you with:</p>
+                                <ul class="text-sm text-muted mt-2 space-y-1">
+                                    <li>• Business automation ideas</li>
+                                    <li>• Website suggestions</li>
+                                    <li>• AI solution recommendations</li>
+                                    <li>• Project estimates</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border-t border-white/5">
+                        <div class="flex gap-2 mb-3 flex-wrap">
+                            <button onclick="sendAIDemo('What AI solutions do you offer?')" class="text-xs px-3 py-1.5 rounded-full glass text-cyan hover:bg-cyan/10 transition-colors">AI Solutions?</button>
+                            <button onclick="sendAIDemo('Give me website ideas for my business')" class="text-xs px-3 py-1.5 rounded-full glass text-cyan hover:bg-cyan/10 transition-colors">Website Ideas</button>
+                            <button onclick="sendAIDemo('How can AI automate my business?')" class="text-xs px-3 py-1.5 rounded-full glass text-cyan hover:bg-cyan/10 transition-colors">Automation Tips</button>
+                        </div>
+                        <div class="flex gap-2">
+                            <input id="ai-demo-input" type="text" placeholder="Ask anything about AI solutions..." class="flex-1 bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-muted focus:outline-none focus:border-accent transition-colors" onkeypress="if(event.key==='Enter')sendAIDemo()">
+                            <button onclick="sendAIDemo()" class="btn-primary px-4 py-3 rounded-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="relative py-20 md:py-32 bg-secondary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">Testimonials</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">What Clients <span class="gradient-text">Say</span></h2>
+                <div class="section-line w-24 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card p-8 reveal testimonial-card" style="border-radius:16px;">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
+                    </div>
+                    <p class="text-muted text-sm leading-relaxed mb-6">"Prem built an AI chatbot for our hotel that handles 80% of customer inquiries automatically. Our team's productivity doubled. Absolutely incredible work!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-neon to-cyan flex items-center justify-center font-bold text-sm">RK</div>
+                        <div>
+                            <div class="font-heading font-semibold text-sm">Rajesh Kumar</div>
+                            <div class="text-muted text-xs">Hotel Owner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 reveal testimonial-card" style="border-radius:16px;">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
+                    </div>
+                    <p class="text-muted text-sm leading-relaxed mb-6">"The website Prem designed for our beauty parlour is stunning. Bookings increased by 150% in the first month. His design sense is unmatched!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center font-bold text-sm">PS</div>
+                        <div>
+                            <div class="font-heading font-semibold text-sm">Priya Sharma</div>
+                            <div class="text-muted text-xs">Salon Owner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 reveal testimonial-card" style="border-radius:16px;">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span><span class="text-yellow-400">★</span>
+                    </div>
+                    <p class="text-muted text-sm leading-relaxed mb-6">"Prem's AI automation system saved us 40+ hours per week. He truly understands business needs and delivers AI solutions that make a real impact."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan to-blue-500 flex items-center justify-center font-bold text-sm">AM</div>
+                        <div>
+                            <div class="font-heading font-semibold text-sm">Amit Mehta</div>
+                            <div class="text-muted text-xs">Startup Founder</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="relative py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-cyan font-heading text-sm uppercase tracking-widest">Get In Touch</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2 mb-4">Let's <span class="gradient-text">Connect</span></h2>
+                <div class="section-line w-24 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="reveal">
+                    <h3 class="font-heading text-2xl font-bold mb-4">Start Your <span class="gradient-text">AI Project</span></h3>
+                    <p class="text-muted mb-8">Ready to transform your business with AI? Let's discuss your project and find the perfect solution.</p>
+
+                    <div class="space-y-4">
+                        <div class="glass-card p-4 flex items-center gap-4" style="border-radius:12px;">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon/20 to-cyan/10 flex items-center justify-center">
+                                <svg width="20" height="20" fill="none" stroke="#22d3ee" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-muted text-xs">Email</div>
+                                <div class="font-heading font-semibold text-sm">prem@aiportfolio.com</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 flex items-center gap-4" style="border-radius:12px;">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-500/10 flex items-center justify-center">
+                                <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-muted text-xs">WhatsApp</div>
+                                <div class="font-heading font-semibold text-sm">+91 XXXXX XXXXX</div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 flex items-center gap-4" style="border-radius:12px;">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-500/10 flex items-center justify-center">
+                                <svg width="20" height="20" fill="none" stroke="#3b82f6" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-muted text-xs">Location</div>
+                                <div class="font-heading font-semibold text-sm">India (Remote Worldwide)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <form id="contact-form" class="glass-card p-8" style="border-radius:20px;">
+                        <div class="space-y-5">
+                            <div>
+                                <label class="text-sm text-muted block mb-2 font-heading">Your Name</label>
+                                <input type="text" name="name" required placeholder="John Doe" class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors">
+                            </div>
+                            <div>
+                                <label class="text-sm text-muted block mb-2 font-heading">Email Address</label>
+                                <input type="email" name="email" required placeholder="john@example.com" class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors">
+                            </div>
+                            <div>
+                                <label class="text-sm text-muted block mb-2 font-heading">Project Type</label>
+                                <select name="project_type" class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-muted focus:outline-none focus:border-accent transition-colors">
+                                    <option value="">Select a service</option>
+                                    <option>AI Automation System</option>
+                                    <option>AI Chatbot</option>
+                                    <option>Website Development</option>
+                                    <option>Mobile App</option>
+                                    <option>E-Book / Digital Product</option>
+                                    <option>AI Business System</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-sm text-muted block mb-2 font-heading">Budget Range</label>
+                                <select name="budget" class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-muted focus:outline-none focus:border-accent transition-colors">
+                                    <option value="">Select budget</option>
+                                    <option>$500 - $1,000</option>
+                                    <option>$1,000 - $5,000</option>
+                                    <option>$5,000 - $10,000</option>
+                                    <option>$10,000+</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-sm text-muted block mb-2 font-heading">Project Details</label>
+                                <textarea name="details" rows="4" placeholder="Tell me about your project..." class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-muted/50 focus:outline-none focus:border-accent transition-colors resize-none"></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button type="submit" class="btn-primary flex-1 text-center py-3.5">
+                                    <span class="flex items-center justify-center gap-2">
+                                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                        Send Message
+                                    </span>
+                                </button>
+                                <a href="https://wa.me/" target="_blank" class="btn-outline flex items-center gap-2 px-4 py-3.5 bg-green-500/10 border-green-500/30 hover:border-green-400" style="border-radius:12px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#22c55e"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="form-success" class="hidden mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 text-sm text-center">
+                            ✅ Message sent successfully! I'll get back to you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon to-cyan flex items-center justify-center font-heading font-bold text-lg">P</div>
+                        <span class="font-heading font-bold text-xl">Prem<span class="text-cyan">AI</span></span>
+                    </div>
+                    <p class="text-muted text-sm leading-relaxed">Building intelligent AI solutions that help businesses automate, grow, and scale in the digital age.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="block text-muted text-sm hover:text-cyan transition-colors">Home</a>
+                        <a href="#about" class="block text-muted text-sm hover:text-cyan transition-colors">About</a>
+                        <a href="#services" class="block text-muted text-sm hover:text-cyan transition-colors">Services</a>
+                        <a href="#projects" class="block text-muted text-sm hover:text-cyan transition-colors">Projects</a>
+                        <a href="#contact" class="block text-muted text-sm hover:text-cyan transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Connect</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-muted hover:text-cyan hover:border-cyan/30 transition-all">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-muted hover:text-cyan hover:border-cyan/30 transition-all">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-muted hover:text-cyan hover:border-cyan/30 transition-all">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-muted hover:text-cyan hover:border-cyan/30 transition-all">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-line w-full mb-8"></div>
+
+            <div class="text-center text-muted text-sm">
+                <p>© 2025 Prem AI Portfolio. All rights reserved. Built with ❤️ and AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING CHATBOT -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div id="chatbot-window" class="chatbot-window absolute bottom-16 right-0 w-80 sm:w-96 mb-4">
+            <div class="glass-card overflow-hidden shadow-2xl" style="border-radius:20px; border-color: rgba(139,92,246,0.4);">
+                <div class="p-4 bg-gradient-to-r from-neon to-cyan flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">🤖</div>
+                        <div>
+                            <div class="font-heading font-semibold text-sm">Prem's AI Assistant</div>
+                            <div class="text-xs text-white/70">Online now</div>
+                        </div>
+                    </div>
+                    <button onclick="toggleChatbot()" class="text-white/70 hover:text-white">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <div id="chatbot-messages" class="h-72 overflow-y-auto p-4 space-y-3 bg-primary/90">
+                    <div class="chat-message flex gap-2">
+                        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-neon to-cyan flex-shrink-0 flex items-center justify-center text-[10px] font-bold mt-1">AI</div>
+                        <div class="glass px-3 py-2 rounded-xl rounded-tl-sm max-w-[85%]">
+                            <p class="text-xs">Hi! 👋 I'm Prem's AI assistant. I can help you understand Prem's services or discuss your project. What would you like to know?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 border-t border-white/5 bg-primary/90">
+                    <div class="flex gap-2">
+                        <input id="chatbot-input" type="text" placeholder="Type your message..." class="flex-1 bg-secondary/50 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder-muted focus:outline-none focus:border-accent" onkeypress="if(event.key==='Enter')sendChatbot()">
+                        <button onclick="sendChatbot()" class="px-3 py-2 rounded-lg bg-gradient-to-r from-neon to-cyan text-xs font-semibold hover:opacity-90 transition-opacity">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="chatbot-toggle" onclick="toggleChatbot()" class="w-14 h-14 rounded-full bg-gradient-to-br from-neon to-cyan flex items-center justify-center shadow-lg pulse-glow hover:scale-110 transition-transform">
+            <svg id="chat-icon" width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </button>
+    </div>
+
+    <script>
+    // ============ THREE.JS 3D BACKGROUND ============
+    (function() {
+        const canvas = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Neural network nodes
+        const nodes = [];
+        const nodeCount = 120;
+        const nodeGeometry = new THREE.SphereGeometry(0.04, 8, 8);
+
+        for (let i = 0; i < nodeCount; i++) {
+            const material = new THREE.MeshBasicMaterial({
+                color: new THREE.Color().lerpColors(
+                    new THREE.Color(0x7c3aed),
+                    new THREE.Color(0x22d3ee),
+                    Math.random()
+                ),
+                transparent: true,
+                opacity: 0.6 + Math.random() * 0.4
+            });
+
+            const node = new THREE.Mesh(nodeGeometry, material);
+            node.position.set(
+                (Math.random() - 0.5) * 12,
+                (Math.random() - 0.5) * 8,
+                (Math.random() - 0.5) * 8
+            );
+            node.userData = {
+                velocity: new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.005,
+                    (Math.random() - 0.5) * 0.005,
+                    (Math.random() - 0.5) * 0.005
+                ),
+                originalPos: node.position.clone()
+            };
+            scene.add(node);
+            nodes.push(node);
+        }
+
+        // Connections
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x7c3aed,
+            transparent: true,
+            opacity: 0.1
+        });
+
+        const connections = [];
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                if (nodes[i].position.distanceTo(nodes[j].position) < 2.5) {
+                    const geometry = new THREE.BufferGeometry().setFromPoints([
+                        nodes[i].position, nodes[j].position
+                    ]);
+                    const line = new THREE.Line(geometry, lineMaterial.clone());
+                    scene.add(line);
+                    connections.push({ line, i, j });
+                }
+            }
+        }
+
+        // Central brain glow
+        const brainGeometry = new THREE.IcosahedronGeometry(1.2, 2);
+        const brainMaterial = new THREE.MeshBasicMaterial({
+            color: 0x7c3aed,
+            transparent: true,
+            opacity: 0.05,
+            wireframe: true
+        });
+        const brain = new THREE.Mesh(brainGeometry, brainMaterial);
+        scene.add(brain);
+
+        const innerBrain = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(0.8, 1),
+            new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.03, wireframe: true })
+        );
+        scene.add(innerBrain);
+
+        camera.position.z = 5;
+
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.001;
+
+            brain.rotation.x = time * 0.1;
+            brain.rotation.y = time * 0.15;
+            innerBrain.rotation.x = -time * 0.12;
+            innerBrain.rotation.y = -time * 0.1;
+
+            nodes.forEach(node => {
+                node.position.add(node.userData.velocity);
+
+                const d = node.position.distanceTo(node.userData.originalPos);
+                if (d > 1.5) {
+                    node.userData.velocity.multiplyScalar(-1);
+                }
+            });
+
+            connections.forEach(conn => {
+                const positions = conn.line.geometry.attributes.position;
+                if (positions) {
+                    positions.setXYZ(0, nodes[conn.i].position.x, nodes[conn.i].position.y, nodes[conn.i].position.z);
+                    positions.setXYZ(1, nodes[conn.j].position.x, nodes[conn.j].position.y, nodes[conn.j].position.z);
+                    positions.needsUpdate = true;
+
+                    const dist = nodes[conn.i].position.distanceTo(nodes[conn.j].position);
+                    conn.line.material.opacity = Math.max(0, 0.15 - dist * 0.04);
+                }
+            });
+
+            camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.02;
+            camera.lookAt(0, 0, 0);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    })();
+
+    // ============ TYPING ANIMATION ============
+    const typingTexts = ['AI Developer', 'Problem Solver', 'Automation Architect', 'Digital Creator'];
+    let textIndex = 0, charIndex = 0, isDeleting = false;
+    const typingEl = document.getElementById('typing-text');
+
+    function typeEffect() {
+        const current = typingTexts[textIndex];
+        if (isDeleting) {
+            typingEl.textContent = current.substring(0, charIndex--);
+            if (charIndex < 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % typingTexts.length;
+                setTimeout(typeEffect, 500);
+                return;
+            }
+            setTimeout(typeEffect, 50);
+        } else {
+            typingEl.textContent = current.substring(0, charIndex++);
+            if (charIndex > current.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+                return;
+            }
+            setTimeout(typeEffect, 100);
+        }
+    }
+    typeEffect();
+
+    // ============ NAVBAR ============
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('glass');
+            navbar.style.borderBottom = '1px solid rgba(139,92,246,0.15)';
+        } else {
+            navbar.classList.remove('glass');
+            navbar.style.borderBottom = 'none';
+        }
+    });
+
+    // ============ MOBILE MENU ============
+    document.getElementById('mobile-toggle').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('open');
+    });
+    document.getElementById('mobile-close').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.remove('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('open');
+        });
+    });
+
+    // ============ SCROLL REVEAL ============
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach((el, i) => {
+        el.style.transitionDelay = `${(i % 6) * 0.1}s`;
+        revealObserver.observe(el);
+    });
+
+    // ============ SKILL BARS ============
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target.querySelector('.progress-bar-fill');
+                const percent = entry.target.dataset.percent;
+                setTimeout(() => { bar.style.width = percent + '%'; }, 300);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.skill-item').forEach(el => skillObserver.observe(el));
+
+    // ============ AI DEMO CHAT ============
+    const aiResponses = {
+        'What AI solutions do you offer?': "Prem offers a comprehensive suite of AI solutions:\n\n🤖 **AI Chatbots** - Custom chatbots for customer support, lead gen, and sales\n⚡ **Automation Systems** - Workflow automation using AI to save 40+ hours/week\n🌐 **AI-Powered Websites** - Smart websites with built-in AI features\n📊 **Business Intelligence** - AI dashboards and analytics tools\n📚 **Content Generation** - AI ebook generators and content tools\n\nWould you like to know more about any specific service?",
+        'Give me website ideas for my business': "Here are some AI-powered website ideas:\n\n🏨 **Smart Business Website** - With AI chatbot, dynamic content, and analytics\n🛒 **AI E-Commerce Store** - Personalized recommendations and smart search\n📋 **Booking Platform** - AI-optimized scheduling and customer management\n📊 **Dashboard Portal** - Real-time analytics with AI insights\n🎯 **Lead Generation Site** - AI-powered forms and conversion optimization\n\nPrem can build any of these. Want to discuss your specific needs?",
+        'How can AI automate my business?': "AI can transform your business in many ways:\n\n📧 **Email Automation** - AI writes and sends personalized emails\n💬 **Customer Support** - 24/7 AI chatbot handles 80% of queries\n📊 **Data Analysis** - Auto-generate reports and insights\n📱 **Social Media** - AI schedules and creates content\n📋 **Lead Qualification** - AI scores and routes leads automatically\n💰 **Invoice Processing** - AI handles billing and follow-ups\n\nPrem has helped businesses save 40+ hours per week with these systems!"
+    };
+
+    function sendAIDemo(presetMsg) {
+        const input = document.getElementById('ai-demo-input');
+        const msg = presetMsg || input.value.trim();
+        if (!msg) return;
+        input.value = '';
+
+        const chat = document.getElementById('ai-demo-chat');
+
+        // User message
+        chat.innerHTML += `
+            <div class="chat-message flex gap-3 justify-end">
+                <div class="bg-gradient-to-r from-neon to-cyan px-4 py-3 rounded-2xl rounded-tr-sm max-w-[80%]">
+                    <p class="text-sm">${msg}</p>
+                </div>
+            </div>`;
+
+        // Typing indicator
+        chat.innerHTML += `
+            <div id="typing-indicator" class="chat-message flex gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon to-cyan flex-shrink-0 flex items-center justify-center text-xs font-bold">AI</div>
+                <div class="glass px-4 py-3 rounded-2xl rounded-tl-sm">
+                    <div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-cyan animate-bounce"></div><div class="w-2 h-2 rounded-full bg-cyan animate-bounce" style="animation-delay:0.1s"></div><div class="w-2 h-2 rounded-full bg-cyan animate-bounce" style="animation-delay:0.2s"></div></div>
+                </div>
+            </div>`;
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) indicator.remove();
+
+            let response = aiResponses[msg] || generateAIResponse(msg);
+
+            chat.innerHTML += `
+                <div class="chat-message flex gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon to-cyan flex-shrink-0 flex items-center justify-center text-xs font-bold">AI</div>
+                    <div class="glass px-4 py-3 rounded-2xl rounded-tl-sm max-w-[80%]">
+                        <p class="text-sm whitespace-pre-line">${response}</p>
+                    </div>
+                </div>`;
+            chat.scrollTop = chat.scrollHeight;
+        }, 1500);
+    }
+
+    function generateAIResponse(msg) {
+        const lower = msg.toLowerCase();
+        if (lower.includes('price') || lower.includes('cost') || lower.includes('budget')) {
+            return "💰 Prem's pricing is flexible and project-based:\n\n• Simple websites: Starting from $500\n• AI Chatbots: Starting from $1,000\n• Full AI Systems: Starting from $3,000\n• Custom Solutions: Let's discuss!\n\nFill out the contact form below for a free consultation! 👇";
+        }
+        if (lower.includes('contact') || lower.includes('hire') || lower.includes('work')) {
+            return "🤝 Great! You can reach Prem through:\n\n📧 Email: prem@aiportfolio.com\n💬 WhatsApp: Available in the contact section\n📝 Contact Form: Scroll down to fill it out\n\nPrem typically responds within 2-4 hours!";
+        }
+        if (lower.includes('chatbot') || lower.includes('bot')) {
+            return "🤖 Prem builds custom AI chatbots that can:\n\n• Handle customer support 24/7\n• Qualify and capture leads\n• Book appointments automatically\n• Answer FAQs intelligently\n• Integrate with your existing systems\n\nThese chatbots have helped clients reduce support costs by 60%!";
+        }
+        return "Thanks for your question! Prem specializes in AI solutions, automation systems, web development, and digital products. He'd love to discuss your specific needs.\n\n💡 Try asking about:\n• AI solutions\n• Website ideas\n• Automation tips\n• Pricing\n\nOr fill out the contact form for a personalized response! 🚀";
+    }
+
+    // ============ CHATBOT ============
+    let chatbotOpen = false;
+    function toggleChatbot() {
+        chatbotOpen = !chatbotOpen;
+        document.getElementById('chatbot-window').classList.toggle('open', chatbotOpen);
+    }
+
+    function sendChatbot() {
+        const input = document.getElementById('chatbot-input');
+        const msg = input.value.trim();
+        if (!msg) return;
+        input.value = '';
+
+        const chat = document.getElementById('chatbot-messages');
+
+        chat.innerHTML += `
+            <div class="chat-message flex gap-2 justify-end">
+                <div class="bg-gradient-to-r from-neon to-cyan px-3 py-2 rounded-xl rounded-tr-sm max-w-[85%]">
+                    <p class="text-xs">${msg}</p>
+                </div>
+            </div>`;
+        chat.scrollTop = chat.scrollHeight;
+
+        setTimeout(() => {
+            const response = getChatbotResponse(msg);
+            chat.innerHTML += `
+                <div class="chat-message flex gap-2">
+                    <div class="w-6 h-6 rounded-full bg-gradient-to-br from-neon to-cyan flex-shrink-0 flex items-center justify-center text-[10px] font-bold mt-1">AI</div>
+                    <div class="glass px-3 py-2 rounded-xl rounded-tl-sm max-w-[85%]">
+                        <p class="text-xs whitespace-pre-line">${response}</p>
+                    </div>
+                </div>`;
+            chat.scrollTop = chat.scrollHeight;
+        }, 1000);
+    }
+
+    function getChatbotResponse(msg) {
+        const lower = msg.toLowerCase();
+        if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
+            return "Hello! 👋 Welcome! I'm here to help you learn about Prem's services. What are you looking for?\n\n• AI Solutions\n• Website Development\n• Automation Systems\n• Project Discussion";
+        }
+        if (lower.includes('service')) {
+            return "Prem offers these services:\n\n🤖 AI Automation Systems\n💬 AI Chatbots & Agents\n🌐 Website Development\n📱 Mobile App Development\n📚 E-Book Design\n⚙️ AI Business Systems\n\nWhich one interests you?";
+        }
+        if (lower.includes('price') || lower.includes('cost') || lower.includes('budget')) {
+            return "💰 Pricing depends on the project scope. To get an accurate quote, please share:\n\n1. Your project type\n2. Key features needed\n3. Your budget range\n\nOr fill out the contact form and Prem will get back to you with a custom quote!";
+        }
+        if (lower.includes('project') || lower.includes('need') || lower.includes('want') || lower.includes('build')) {
+            return "Awesome! 🚀 I'd love to learn more about your project. Could you share:\n\n1. What type of project? (website, app, AI system)\n2. Your business/industry?\n3. Any specific features you need?\n\nOr you can fill the contact form for a detailed discussion!";
+        }
+        return "Thanks for your message! Prem can help with AI solutions, websites, apps, and automation.\n\nFor a detailed conversation, please:\n📝 Fill the contact form below\n💬 Or ask me about specific services!\n\nI'm here to help! 😊";
+    }
+
+    // ============ CONTACT FORM ============
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        // Store lead (in production, send to Firebase/Supabase)
+        console.log('Lead captured:', data);
+
+        // Save to localStorage as demo
+        const leads = JSON.parse(localStorage.getItem('prem_leads') || '[]');
+        leads.push({ ...data, timestamp: new Date().toISOString() });
+        localStorage.setItem('prem_leads', JSON.stringify(leads));
+
+        document.getElementById('form-success').classList.remove('hidden');
+        this.reset();
+
+        setTimeout(() => {
+            document.getElementById('form-success').classList.add('hidden');
+        }, 5000);
+    });
+
+    // ============ FLOATING PARTICLES ============
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            particle.style.width = (Math.random() * 3 + 1) + 'px';
+            particle.style.height = particle.style.width;
+
+            const keyframes = `
+                @keyframes float${i} {
+                    0% { transform: translate(0, 0); opacity: ${Math.random() * 0.3}; }
+                    25% { transform: translate(${Math.random()*100-50}px, ${Math.random()*100-50}px); }
+                    50% { transform: translate(${Math.random()*100-50}px, ${Math.random()*100-50}px); opacity: ${Math.random() * 0.5 + 0.1}; }
+                    75% { transform: translate(${Math.random()*100-50}px, ${Math.random()*100-50}px); }
+                    100% { transform: translate(0, 0); opacity: ${Math.random() * 0.3}; }
+                }
+            `;
+            const style = document.createElement('style');
+            style.textContent = keyframes;
+            document.head.appendChild(style);
+            particle.style.animation = `float${i} ${Math.random() * 20 + 15}s ease-in-out infinite`;
+
+            container.appendChild(particle);
+        }
+    }
+    createParticles();
+
+    // ============ SMOOTH SCROLL ============
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
+```
